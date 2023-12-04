@@ -4,6 +4,7 @@ from pybricks.parameters import Button, Color, Direction, Port, Side, Stop
 from pybricks.robotics import DriveBase
 from pybricks.tools import wait, StopWatch
 
+
 hub = CityHub()
 motor = Motor(Port.A)
 light = Light(Port.B)
@@ -28,7 +29,7 @@ tspeed = 0
 #currentspeed
 cspeed = 0
 #next step 
-nstep = (maxtspeed-mintspeed)/(steps-1)
+nstep = round((maxtspeed-mintspeed)/(steps-1))
 wpressed = ()
 
 hub.light.on(Color.ORANGE)
@@ -67,7 +68,7 @@ def remote():
             cspeed = 0
         if Button.CENTER in wpressed:
             system.shutdown()
-        print(tspeed)
+        print("tspeed", tspeed)
         while wpressed:
             wpressed = myremote.buttons.pressed()
         if tspeed > cspeed and cspeed is 0:
@@ -78,7 +79,7 @@ def remote():
             cspeed = -minspeed
         elif tspeed < cspeed:
             cspeed = cspeed-a
-        print(cspeed)
+        print("cspeed", cspeed)
         if cspeed is 0:
             motor.stop()
         else:
